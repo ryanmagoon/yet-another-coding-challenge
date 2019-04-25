@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 const Container = styled.section`
   background: whitesmoke;
@@ -7,15 +8,21 @@ const Container = styled.section`
   padding: 5px;
   display: flex;
   margin-bottom: 15px;
+
+  &:hover {
+    background-color: lightgray;
+  }
 `
 
 const UserCard = ({
   avatar, firstName, lastName, id,
 }) => (
-  <Container>
-    <img src={avatar} alt={`${firstName} ${lastName}`} />
-    <span>{`${firstName} ${lastName}`}</span>
-  </Container>
+  <Link to={`/details/${id}`}>
+    <Container>
+      <img src={avatar} alt={`${firstName} ${lastName}`} />
+      <span>{`${firstName} ${lastName}`}</span>
+    </Container>
+  </Link>
 )
 
 export default UserCard

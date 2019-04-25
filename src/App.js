@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import { Router } from '@reach/router'
 import axios from 'axios'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 
+import mockResponse from './mockResponse'
 import Header from './modules/Header'
-import UserCard from './modules/UserCard'
+import Home from './modules/Home'
+import Details from './modules/Details'
 
 const AppContainer = styled.main`
   background-color: ${lighten(0.2, 'tomato')};
-  /* flex: 1; */
+  flex: 1;
 `
 
 const App = () => {
@@ -17,7 +20,8 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: response } = await axios.get('https://reqres.in/api/users?page=1')
+      // const { data: response } = await axios.get('https://reqres.in/api/users?page=1')
+      const response = mockResponse
       setData({
         ...response,
         users: response.data.map(({ first_name, last_name, ...rest }) => ({
@@ -34,10 +38,10 @@ const App = () => {
   return (
     <AppContainer className="App">
       <Header />
-      {data.users.length === 0 && <h1>Loading...</h1>}
-      {data.users.map(user => (
-        <UserCard {...user} />
-      ))}
+      <Router>
+        <Home path="/" data={data} />
+        <Details path="/details/:id" />
+      </Router>
     </AppContainer>
   )
 }
