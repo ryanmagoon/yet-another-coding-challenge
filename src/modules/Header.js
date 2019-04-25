@@ -1,18 +1,26 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Link } from '@reach/router'
+import { Box } from 'grommet'
 
-const Container = styled.section`
-  background-color: tomato;
-  color: whitesmoke;
-  padding: 10px;
-`
+const AppBar = props => (
+  <Box
+    tag="header"
+    direction="row"
+    align="center"
+    justify="between"
+    background="brand"
+    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
+    elevation="medium"
+    style={{ zIndex: '1' }}
+    {...props}
+  />
+)
 
 const Header = () => (
   <Link to="/">
-    <Container>
+    <AppBar>
       <h1>Hello!</h1>
-    </Container>
+    </AppBar>
   </Link>
 )
 

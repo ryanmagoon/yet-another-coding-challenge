@@ -2,10 +2,10 @@ import React from 'react'
 
 import UserCard from './UserCard'
 
-const Home = ({ data }) => (
+const Home = ({ users }) => (
   <>
-    {data.users.length === 0 && <h1>Loading...</h1>}
-    {data.users.map(user => (
+    {users.length === 0 && <h1>Loading...</h1>}
+    {users.map(user => (
       <UserCard key={user.id} {...user} />
     ))}
   </>

@@ -3,16 +3,22 @@ import { Router } from '@reach/router'
 import axios from 'axios'
 import styled from 'styled-components'
 import { lighten } from 'polished'
+import { Box, Grommet } from 'grommet'
 
 import mockResponse from './mockResponse'
 import Header from './modules/Header'
 import Home from './modules/Home'
 import Details from './modules/Details'
 
-const AppContainer = styled.main`
-  background-color: ${lighten(0.2, 'tomato')};
-  flex: 1;
-`
+const theme = {
+  global: {
+    font: {
+      family: 'Roboto',
+      size: '14px',
+      height: '20px',
+    },
+  },
+}
 
 const App = () => {
   const [data, setData] = useState({ users: [] })
@@ -36,13 +42,28 @@ const App = () => {
   }, [])
 
   return (
-    <AppContainer className="App">
-      <Header />
-      <Router>
-        <Home path="/" data={data} />
-        <Details path="/details/:id" />
-      </Router>
-    </AppContainer>
+    <Grommet theme={theme}>
+      <Box fill>
+        <Header />
+        <Box flex direction="row">
+          <Box
+            width="medium"
+            background="light-2"
+            elevation="small"
+            align="center"
+            justify="center"
+          >
+            sidebar
+          </Box>
+          <Box flex align="center" justify="center">
+            <Router>
+              <Home path="/" users={data.users} />
+              <Details path="/details/:id" users={data.users} />
+            </Router>
+          </Box>
+        </Box>
+      </Box>
+    </Grommet>
   )
 }
 
