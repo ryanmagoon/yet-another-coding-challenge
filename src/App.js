@@ -42,7 +42,7 @@ const App = () => {
   }, [])
 
   return (
-    <Grommet theme={theme}>
+    <Grommet theme="dark">
       <Box fill>
         <Header />
         <Box flex direction="row">
