@@ -3,7 +3,7 @@ import { FormField, TextInput } from 'grommet'
 import PropTypes from 'prop-types'
 
 const LastName = ({ lastName, onChange }) => (
-  <FormField name="lastName" label="Last Name" required>
+  <FormField name="lastName" label="Last Name*" required>
     <TextInput
       placeholder="Scissorhands"
       value={lastName}

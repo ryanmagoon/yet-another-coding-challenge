@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const Phone = ({ phone, onChange }) => (
   <FormField
     name="phone"
-    label="Phone Number"
+    label="Phone Number*"
     required
     validate={{
       regexp: /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/,
