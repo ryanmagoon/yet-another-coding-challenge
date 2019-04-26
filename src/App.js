@@ -8,7 +8,7 @@ import { Box, Grommet } from 'grommet'
 import mockResponse from './mockResponse'
 import Header from './modules/Header'
 import Home from './modules/Home'
-import Details from './modules/Details'
+import Details from './modules/Details/Details'
 
 const theme = {
   global: {
@@ -18,6 +18,24 @@ const theme = {
       height: '20px',
     },
   },
+}
+
+const initialState = { users: [] }
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'CREATE_USER':
+      return {
+        users: [...state.users, action.user],
+      }
+    case 'UPDATE_USER':
+      return {
+        ...state.users,
+        [action.id]: action.user,
+      }
+    default:
+      return state
+  }
 }
 
 const App = () => {
@@ -42,7 +60,7 @@ const App = () => {
   }, [])
 
   return (
-    <Grommet theme="dark">
+    <Grommet theme={theme}>
       <Box fill>
         <Header />
         <Box flex direction="row">
