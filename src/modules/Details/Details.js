@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'grommet'
+import { Box, Button, Form } from 'grommet'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import FirstName from './FirstName/FirstName'
 import LastName from './LastName/LastName'
@@ -10,6 +11,13 @@ import BirthDate from './BirthDate/BirthDate'
 import Age from './Age/Age'
 import Height from './Height/Height'
 import Education from './Education/Education'
+
+const Row = styled(Box)`
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+    justify-content: space-around;
+  `
 
 const Details = ({ id = '', onSubmit = () => {}, users }) => {
   const myUser = users.find(user => Number(id) === user.id) || {}
@@ -47,14 +55,22 @@ const Details = ({ id = '', onSubmit = () => {}, users }) => {
         education,
       }}
     >
-      <FirstName firstName={firstName} onChange={setFirstName} />
-      <LastName lastName={lastName} onChange={setLastName} />
-      <Phone phone={phone} onChange={setPhone} />
-      <Address address={address} onChange={setAddress} />
-      <BirthDate birthDate={birthDate} onChange={handleChangeBirthDate} />
-      <Age age={age} />
-      <Height height={height} onChange={setHeight} />
-      <Education />
+      <Row>
+        <FirstName firstName={firstName} onChange={setFirstName} />
+        <LastName lastName={lastName} onChange={setLastName} />
+      </Row>
+      <Row>
+        <Phone phone={phone} onChange={setPhone} />
+        <Address address={address} onChange={setAddress} />
+      </Row>
+      <Row>
+        <BirthDate birthDate={birthDate} onChange={handleChangeBirthDate} />
+        <Age age={age} />
+      </Row>
+      <Row>
+        <Height height={height} onChange={setHeight} />
+        <Education />
+      </Row>
       <Button type="submit" primary label="Submit" />
     </Form>
   )

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Router } from '@reach/router'
 import axios from 'axios'
-import styled from 'styled-components'
-import { lighten } from 'polished'
 import { Box, Grommet } from 'grommet'
 
 import mockResponse from './mockResponse'
@@ -64,15 +62,6 @@ const App = () => {
       <Box fill>
         <Header />
         <Box flex direction="row">
-          <Box
-            width="medium"
-            background="light-2"
-            elevation="small"
-            align="center"
-            justify="center"
-          >
-            sidebar
-          </Box>
           <Box flex align="center" justify="center">
             <Router>
               <Home path="/" users={data.users} />
