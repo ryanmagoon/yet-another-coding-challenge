@@ -46,8 +46,7 @@ const Details = ({ id = '', onSubmit = () => {}, users }) => {
   }
 
   const handleSubmit = ({ value }) => {
-    // console.table(event.value)
-    onSubmit({ id, ...value })
+    onSubmit({ ...myUser, id: Number(id), ...value })
     navigate('/', { replace: true })
   }
 

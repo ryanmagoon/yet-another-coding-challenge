@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Router } from '@reach/router'
-import axios from 'axios'
+// import axios from 'axios'
 import { Box, Grommet } from 'grommet'
 
 import mockResponse from './mockResponse'
@@ -18,7 +18,7 @@ const theme = {
   },
 }
 
-const convertToSnakeCase = string => string.replace(/[A-Z]/g, val => `_${val.toLowerCase()}`).replace(/^_/, '')
+// const convertToSnakeCase = string => string.replace(/[A-Z]/g, val => `_${val.toLowerCase()}`).replace(/^_/, '')
 
 const App = () => {
   const [data, setData] = useState({ users: [] })
@@ -46,18 +46,30 @@ const App = () => {
       return value
         ? {
           ...acc,
-          [convertToSnakeCase(key)]: value,
+          [key]: value,
         }
         : { ...acc }
     }, {})
     if (id) {
-      console.log('updating')
-    } else {
-      console.log('new one')
+      const newUsers = data.users.filter(({ id: userId }) => id !== userId)
+      return setData({
+        users: [
+          ...newUsers,
+          {
+            id,
+            ...nonNullParams,
+          },
+        ],
+      })
     }
-    console.log('submitted', {
-      id,
-      nonNullParams,
+    setData({
+      users: [
+        ...data.users,
+        {
+          id: Math.max(...data.users.map(user => user.id)) + 1,
+          ...nonNullParams,
+        },
+      ],
     })
   }
 
