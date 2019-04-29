@@ -3,6 +3,7 @@ import { Box, Button, Form } from 'grommet'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { navigate } from '@reach/router'
 import FirstName from './FirstName/FirstName'
 import LastName from './LastName/LastName'
 import Phone from './Phone/Phone'
@@ -13,14 +14,17 @@ import Height from './Height/Height'
 import Education from './Education/Education'
 
 const Row = styled(Box)`
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 2em;
-    justify-content: space-around;
-  `
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2em;
+  justify-content: space-around;
+`
 
 const Details = ({ id = '', onSubmit = () => {}, users }) => {
   const myUser = users.find(user => Number(id) === user.id) || {}
+  if (id && Object.entries(myUser).length === 0) {
+    navigate('/')
+  }
   const [firstName, setFirstName] = useState(myUser.firstName || '')
   const [lastName, setLastName] = useState(myUser.lastName || '')
   const [phone, setPhone] = useState(myUser.phone || '')
@@ -28,7 +32,12 @@ const Details = ({ id = '', onSubmit = () => {}, users }) => {
   const [birthDate, setBirthDate] = useState(myUser.birthDate || '')
   const [age, setAge] = useState(myUser.age || '')
   const [height, setHeight] = useState(myUser.height || '')
-  const [education, setEducation] = useState(myUser.education || null)
+  const [education, setEducation] = useState(
+    myUser.education || {
+      institution: '',
+      degreeObtained: '',
+    },
+  )
 
   const handleChangeBirthDate = (newBirthDate) => {
     setBirthDate(newBirthDate)
@@ -36,9 +45,9 @@ const Details = ({ id = '', onSubmit = () => {}, users }) => {
     setAge(Math.abs(ageDate.getUTCFullYear() - 1970))
   }
 
-  const handleSubmit = (event) => {
-    console.table(event.value)
-    onSubmit(event.value)
+  const handleSubmit = ({ value }) => {
+    // console.table(event.value)
+    onSubmit({ id, ...value })
   }
 
   return (
@@ -69,7 +78,7 @@ const Details = ({ id = '', onSubmit = () => {}, users }) => {
       </Row>
       <Row>
         <Height height={height} onChange={setHeight} />
-        <Education />
+        <Education education={education} onChange={setEducation} />
       </Row>
       <Button type="submit" primary label="Submit" />
     </Form>

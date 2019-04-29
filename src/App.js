@@ -18,6 +18,8 @@ const theme = {
   },
 }
 
+const convertToSnakeCase = string => string.replace(/[A-Z]/g, val => `_${val.toLowerCase()}`).replace(/^_/, '')
+
 const initialState = { users: [] }
 
 const reducer = (state, action) => {
@@ -38,7 +40,6 @@ const reducer = (state, action) => {
 
 const App = () => {
   const [data, setData] = useState({ users: [] })
-  const [currentUserId, setCurrentUserId] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +58,27 @@ const App = () => {
     fetchData()
   }, [])
 
+  const handleFormSubmit = ({ id, ...params }) => {
+    const nonNullParams = Object.entries(params).reduce((acc, curr) => {
+      const [key, value] = curr
+      return value
+        ? {
+          ...acc,
+          [convertToSnakeCase(key)]: value,
+        }
+        : { ...acc }
+    }, {})
+    if (id) {
+      console.log('updating')
+    } else {
+      console.log('new one')
+    }
+    console.log('submitted', {
+      id,
+      nonNullParams,
+    })
+  }
+
   return (
     <Grommet theme={theme}>
       <Box fill>
@@ -65,7 +87,7 @@ const App = () => {
           <Box flex align="center" justify="center">
             <Router>
               <Home path="/" users={data.users} />
-              <Details path="/details/:id" users={data.users} />
+              <Details path="/details/:id" users={data.users} onSubmit={handleFormSubmit} />
             </Router>
           </Box>
         </Box>

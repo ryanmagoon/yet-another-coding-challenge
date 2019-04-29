@@ -6,9 +6,8 @@ const Height = ({ height, onChange }) => (
   <FormField
     name="height"
     label="Height"
-    required
     validate={{
-      regexp: /^(\d{1,5})'((\s?)(-?)(\s?)([0-9]|(1[0-1]))")?$/,
+      regexp: /^((\d{1,5})'((\s?)(-?)(\s?)([0-9]|(1[0-1]))")?)?$/,
       message: 'Please enter a valid height',
     }}
   >
