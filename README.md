@@ -6,7 +6,7 @@ I went with reach router and grommet because they're accessible by default, whic
 
 Didn't have time to do any integration testing, but I would have mostly just used jest to make sure all the label texts were visible in the component, and maybe some edge case testing for values. Didn't have time to do any animations or decent layout either 😃, and if I had a little extra time I would have done photo support.
 
-The biggest problem I had was that the api kept going down or throttling me, so I just mocked out the data. It wouldn't be a big deal to refetch it.
+The biggest problem I had was that the api kept going down or throttling me, so I just mocked out the data. It wouldn't be a big deal to refetch it and support the api calls.
 
 here's the app: https://yet-another-coding-challenge-ryanmagoon.find-my-spot1.now.sh
 
