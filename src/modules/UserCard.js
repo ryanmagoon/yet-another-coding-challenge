@@ -19,7 +19,7 @@ const UserCard = ({
 }) => (
   <Link to={`/details/${id}`}>
     <Container>
-      <img src={avatar} alt={`${firstName} ${lastName}`} />
+      <img src={avatar || 'http://www.fillmurray.com/125/125'} alt={`${firstName} ${lastName}`} />
       <span>{`${firstName} ${lastName}`}</span>
     </Container>
   </Link>
