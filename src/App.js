@@ -20,24 +20,6 @@ const theme = {
 
 const convertToSnakeCase = string => string.replace(/[A-Z]/g, val => `_${val.toLowerCase()}`).replace(/^_/, '')
 
-const initialState = { users: [] }
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'CREATE_USER':
-      return {
-        users: [...state.users, action.user],
-      }
-    case 'UPDATE_USER':
-      return {
-        ...state.users,
-        [action.id]: action.user,
-      }
-    default:
-      return state
-  }
-}
-
 const App = () => {
   const [data, setData] = useState({ users: [] })
 
@@ -88,6 +70,7 @@ const App = () => {
             <Router>
               <Home path="/" users={data.users} />
               <Details path="/details/:id" users={data.users} onSubmit={handleFormSubmit} />
+              <Details path="/new" users={data.users} onSubmit={handleFormSubmit} />
             </Router>
           </Box>
         </Box>

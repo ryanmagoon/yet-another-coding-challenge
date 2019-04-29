@@ -23,7 +23,7 @@ const Row = styled(Box)`
 const Details = ({ id = '', onSubmit = () => {}, users }) => {
   const myUser = users.find(user => Number(id) === user.id) || {}
   if (id && Object.entries(myUser).length === 0) {
-    navigate('/')
+    navigate('/', { replace: true })
   }
   const [firstName, setFirstName] = useState(myUser.firstName || '')
   const [lastName, setLastName] = useState(myUser.lastName || '')
@@ -48,6 +48,7 @@ const Details = ({ id = '', onSubmit = () => {}, users }) => {
   const handleSubmit = ({ value }) => {
     // console.table(event.value)
     onSubmit({ id, ...value })
+    navigate('/', { replace: true })
   }
 
   return (
