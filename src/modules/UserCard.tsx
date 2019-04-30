@@ -15,11 +15,22 @@ const Container = styled.section`
 `
 
 const UserCard = ({
-  avatar, firstName, lastName, id,
+  avatar,
+  firstName,
+  lastName,
+  id
+}: {
+  avatar?: string
+  firstName: string
+  lastName: string
+  id?: number
 }) => (
   <Link to={`/details/${id}`}>
     <Container>
-      <img src={avatar || 'http://www.fillmurray.com/125/125'} alt={`${firstName} ${lastName}`} />
+      <img
+        src={avatar || 'http://www.fillmurray.com/125/125'}
+        alt={`${firstName} ${lastName}`}
+      />
       <span>{`${firstName} ${lastName}`}</span>
     </Container>
   </Link>
